@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<ul id="list"></ul>
+
+<button id="prev">Previous</button>
+<span id="page"></span>
+<button id="next">Next</button>
+
+<script>
+const students = ["Aarav","Anika","Rahul","Riya","Kiran","Sameer","Meera","Virat","Isha","Rohan",
+"Aditya","Sneha","Kavya","Manoj","Neha","Suresh","Pooja","Dev","Tara","Akash"];
+
+let page = 1, perPage = 10;
+
+function showPage() {
+  const start = (page - 1) * perPage;
+  const items = students.slice(start, start + perPage);
+
+  document.getElementById("list").innerHTML =
+    items.map(s => `<li>${s}</li>`).join("");
+
+  document.getElementById("page").textContent = "Page " + page;
+
+  document.getElementById("prev").disabled = page === 1;
+  document.getElementById("next").disabled = page * perPage >= students.length;
+}
+
+document.getElementById("prev").onclick = () => { page--; showPage(); };
+document.getElementById("next").onclick = () => { page++; showPage(); };
+
+showPage();
+</script>
+
+</body>
+</html>
